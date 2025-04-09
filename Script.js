@@ -1,3 +1,14 @@
+let currentBackgroundColour = "rgb(0,0,0)";
+let currentBackgroundColourFlag = true;
+
+function mouseEnterHandler(event) {
+  event.target.classList.toggle("hover");
+}
+
+function mouseLeaveHandler(event) {
+  event.target.classList.toggle("default");
+}
+
 function drawGrid(size) {
   let screen = document.querySelector(".sketch-screen");
   for (let i = 0; i < size; i++) {
@@ -7,19 +18,13 @@ function drawGrid(size) {
       let row = document.createElement("div");
       row.classList.add("row");
       row.style.border = "2px solid black";
-      row.addEventListener("mouseenter", (event) =>
-        event.target.classList.toggle("hover")
-      );
-      row.addEventListener("mouseleave", (event) => {
-        event.target.classList.toggle("default");
-      });
+      row.addEventListener("mouseenter", mouseEnterHandler);
+      row.addEventListener("mouseleave", mouseLeaveHandler);
       column.appendChild(row);
     }
     screen.appendChild(column);
   }
 }
-
-drawGrid(10);
 
 const btnSize = document.querySelector(".size");
 btnSize.addEventListener("click", () => {
@@ -33,5 +38,19 @@ btnSize.addEventListener("click", () => {
     let columns = document.querySelectorAll(".column");
     columns.forEach((column) => column.parentNode.removeChild(column));
     drawGrid(gridSize);
+    draw(currentBackgroundColour);
   }
 });
+
+drawGrid(10);
+draw(currentBackgroundColour);
+function draw(color) {
+  const cells = document.querySelectorAll(".row");
+  cells.forEach((cell) => {
+    cell.addEventListener("click", (event) => {
+      event.target.style.backgroundColor = color;
+      event.target.removeEventListener("mouseenter", mouseEnterHandler);
+      event.target.removeEventListener("mouseleave", mouseLeaveHandler);
+    });
+  });
+}
