@@ -1,6 +1,6 @@
 let currentBackgroundColour = "rgb(0,0,0)";
 let currentBackgroundColourFlag = true;
-
+let randomColourFlag = false;
 function mouseEnterHandler(event) {
   event.target.classList.toggle("hover");
 }
@@ -9,6 +9,9 @@ function mouseLeaveHandler(event) {
   event.target.classList.toggle("default");
 }
 
+function random(min, max) {
+  return Math.floor(Math.random() * (max - min) + min);
+}
 function drawGrid(size) {
   let screen = document.querySelector(".sketch-screen");
   for (let i = 0; i < size; i++) {
@@ -42,13 +45,38 @@ btnSize.addEventListener("click", () => {
   }
 });
 
+const btnBlack = document.querySelector(".black");
+btnBlack.addEventListener("click", () => {
+  currentBackgroundColour = "rgb(0,0,0)";
+  currentBackgroundColourFlag = true;
+  randomColourFlag = false;
+  console.log("CurrentColourFlag: ", currentBackgroundColourFlag);
+  console.log("RandomColourFlag: ", randomColourFlag);
+});
+
+const btnRandom = document.querySelector(".random");
+btnRandom.addEventListener("click", () => {
+  currentBackgroundColourFlag = false;
+  randomColourFlag = true;
+  console.log("CurrentColourFlag: ", currentBackgroundColourFlag);
+  console.log("RandomColourFlag: ", randomColourFlag);
+});
 drawGrid(10);
-draw(currentBackgroundColour);
-function draw(color) {
+draw();
+
+function draw() {
   const cells = document.querySelectorAll(".row");
   cells.forEach((cell) => {
     cell.addEventListener("click", (event) => {
-      event.target.style.backgroundColor = color;
+      if (currentBackgroundColourFlag) {
+        event.target.style.backgroundColor = currentBackgroundColour;
+      } else if (randomColourFlag) {
+        let randomColour = `rgb(${random(0, 256)},${random(0, 256)},${random(
+          0,
+          256
+        )})`;
+        event.target.style.backgroundColor = randomColour;
+      }
       event.target.removeEventListener("mouseenter", mouseEnterHandler);
       event.target.removeEventListener("mouseleave", mouseLeaveHandler);
     });
