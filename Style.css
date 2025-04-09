@@ -46,3 +46,11 @@ body {
 .sketch-screen>div>* {
     flex: 1;
 }
+
+.hover {
+    background-color: white;
+}
+
+.default {
+    background-color: #bfbfbf;
+}
