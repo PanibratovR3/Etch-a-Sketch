@@ -51,16 +51,28 @@ btnBlack.addEventListener("click", () => {
   currentBackgroundColour = "rgb(0,0,0)";
   currentBackgroundColourFlag = true;
   randomColourFlag = false;
-  console.log("CurrentColourFlag: ", currentBackgroundColourFlag);
-  console.log("RandomColourFlag: ", randomColourFlag);
+  let buttons = document.querySelectorAll(".sketch-control>button");
+  buttons.forEach((button) => {
+    if (button.classList.contains("black")) {
+      button.style.backgroundColor = "gold";
+    } else {
+      button.style.backgroundColor = "white";
+    }
+  });
 });
 
 const btnRandom = document.querySelector(".random");
 btnRandom.addEventListener("click", () => {
   currentBackgroundColourFlag = false;
   randomColourFlag = true;
-  console.log("CurrentColourFlag: ", currentBackgroundColourFlag);
-  console.log("RandomColourFlag: ", randomColourFlag);
+  let buttons = document.querySelectorAll(".sketch-control>button");
+  buttons.forEach((button) => {
+    if (button.classList.contains("random")) {
+      button.style.backgroundColor = "gold";
+    } else {
+      button.style.backgroundColor = "white";
+    }
+  });
 });
 
 const btnReset = document.querySelector(".reset");
@@ -73,6 +85,14 @@ btnReset.addEventListener("click", () => {
   columns.forEach((column) => column.parentNode.removeChild(column));
   drawGrid(size);
   draw(currentBackgroundColour);
+  let buttons = document.querySelectorAll(".sketch-control>button");
+  buttons.forEach((button) => {
+    if (button.classList.contains("reset")) {
+      button.style.backgroundColor = "gold";
+    } else {
+      button.style.backgroundColor = "white";
+    }
+  });
 });
 
 function draw() {
