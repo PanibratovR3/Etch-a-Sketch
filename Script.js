@@ -5,6 +5,7 @@ function mouseEnterHandler(event) {
   event.target.classList.toggle("hover");
 }
 
+let size = 10;
 function mouseLeaveHandler(event) {
   event.target.classList.toggle("default");
 }
@@ -31,16 +32,16 @@ function drawGrid(size) {
 
 const btnSize = document.querySelector(".size");
 btnSize.addEventListener("click", () => {
-  let gridSize = parseInt(prompt("Enter the size of grid.", "100"));
-  console.log(gridSize);
-  if (isNaN(gridSize)) {
+  let newSize = parseInt(prompt("Enter the size of grid.", "100"));
+  if (isNaN(newSize)) {
     alert("Error! Number was not entered.");
-  } else if (gridSize > 100 || gridSize < 1) {
+  } else if (newSize > 100 || newSize < 1) {
     alert("Error! Number must be between 1 and 100.");
   } else {
+    size = newSize;
     let columns = document.querySelectorAll(".column");
     columns.forEach((column) => column.parentNode.removeChild(column));
-    drawGrid(gridSize);
+    drawGrid(size);
     draw(currentBackgroundColour);
   }
 });
@@ -61,8 +62,18 @@ btnRandom.addEventListener("click", () => {
   console.log("CurrentColourFlag: ", currentBackgroundColourFlag);
   console.log("RandomColourFlag: ", randomColourFlag);
 });
-drawGrid(10);
-draw();
+
+const btnReset = document.querySelector(".reset");
+btnReset.addEventListener("click", () => {
+  let rows = document.querySelectorAll(".row");
+  rows.forEach((row) => {
+    row.style.backgroundColor = "#bfbfbf";
+  });
+  let columns = document.querySelectorAll(".column");
+  columns.forEach((column) => column.parentNode.removeChild(column));
+  drawGrid(size);
+  draw(currentBackgroundColour);
+});
 
 function draw() {
   const cells = document.querySelectorAll(".row");
@@ -82,3 +93,6 @@ function draw() {
     });
   });
 }
+
+drawGrid(size);
+draw();
