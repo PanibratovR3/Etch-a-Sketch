@@ -20,3 +20,18 @@ function drawGrid(size) {
 }
 
 drawGrid(10);
+
+const btnSize = document.querySelector(".size");
+btnSize.addEventListener("click", () => {
+  let gridSize = parseInt(prompt("Enter the size of grid.", "100"));
+  console.log(gridSize);
+  if (isNaN(gridSize)) {
+    alert("Error! Number was not entered.");
+  } else if (gridSize > 100 || gridSize < 1) {
+    alert("Error! Number must be between 1 and 100.");
+  } else {
+    let columns = document.querySelectorAll(".column");
+    columns.forEach((column) => column.parentNode.removeChild(column));
+    drawGrid(gridSize);
+  }
+});

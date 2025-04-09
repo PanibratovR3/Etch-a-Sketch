@@ -21,6 +21,7 @@ body {
 .sketch-container {
     display: flex;
     justify-content: center;
+    flex-direction: column;
     width: 800px;
     height: 800px;
     background-color: #991101;
@@ -30,6 +31,7 @@ body {
 .sketch-screen {
     display: flex;
     flex-direction: row;
+    margin: 0 auto;
     justify-content: space-around;
     width: 600px;
     height: 600px;
@@ -47,10 +49,21 @@ body {
     flex: 1;
 }
 
+.sketch-control {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
 .hover {
     background-color: white;
 }
 
 .default {
     background-color: #bfbfbf;
+}
+
+button {
+    font-size: 20px;
+    padding: 15px;
 }
