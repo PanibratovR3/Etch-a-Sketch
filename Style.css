@@ -87,3 +87,18 @@ button {
 .size > button {
     margin-bottom: 10px;
 }
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    background-color: lightblue;
+    height: 65px;
+    font-size: 20px;
+}
+
+img {
+    height: 20px;
+    width: 20px;
+}

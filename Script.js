@@ -1,6 +1,8 @@
 let currentBackgroundColour = "rgb(0,0,0)";
+const DEFAULTCOLOR = "#bfbfbf";
 let currentBackgroundColourFlag = true;
 let randomColourFlag = false;
+let eraserFlag = false;
 function mouseEnterHandler(event) {
   event.target.classList.toggle("hover");
 }
@@ -95,6 +97,21 @@ btnReset.addEventListener("click", () => {
   });
 });
 
+const btnErase = document.querySelector(".erase");
+btnErase.addEventListener("click", () => {
+  currentBackgroundColourFlag = false;
+  randomColourFlag = false;
+  eraserFlag = true;
+  let buttons = document.querySelectorAll(".sketch-control>button");
+  buttons.forEach((button) => {
+    if (button.classList.contains("erase")) {
+      button.style.backgroundColor = "gold";
+    } else {
+      button.style.backgroundColor = "white";
+    }
+  });
+});
+
 function draw() {
   const cells = document.querySelectorAll(".row");
   cells.forEach((cell) => {
@@ -107,6 +124,8 @@ function draw() {
           256
         )})`;
         event.target.style.backgroundColor = randomColour;
+      } else if (eraserFlag) {
+        event.target.style.backgroundColor = DEFAULTCOLOR;
       }
       event.target.removeEventListener("mouseenter", mouseEnterHandler);
       event.target.removeEventListener("mouseleave", mouseLeaveHandler);
