@@ -103,3 +103,11 @@ img {
     height: 20px;
     width: 20px;
 }
+
+input[type='color'] {
+    appearance: none;
+    min-width: 100px;
+    min-height: 40px;
+    margin-top: 10px;
+    padding: 3px 5px;
+}

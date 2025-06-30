@@ -15,6 +15,14 @@ function mouseLeaveHandler(event) {
 function random(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
+
+function hexToDecimalColor(hexString) {
+  const redDecimal = Number("0x" + hexString.slice(1, 3));
+  const greenDecimal = Number("0x" + hexString.slice(3, 5));
+  const blueDecimal = Number("0x" + hexString.slice(5));
+  return [redDecimal, greenDecimal, blueDecimal];
+}
+
 function drawGrid(size) {
   let screen = document.querySelector(".sketch-screen");
   for (let i = 0; i < size; i++) {
@@ -110,6 +118,16 @@ btnErase.addEventListener("click", () => {
       button.style.backgroundColor = "white";
     }
   });
+});
+
+const colorPicker = document.querySelector("#color-picker");
+colorPicker.addEventListener("change", (event) => {
+  const hexColor = event.target.value;
+  let [redComponent, greenComponent, blueComponent] =
+    hexToDecimalColor(hexColor);
+  currentBackgroundColour = `rgb(${redComponent}, ${greenComponent}, ${blueComponent})`;
+  currentBackgroundColourFlag = true;
+  draw(currentBackgroundColour);
 });
 
 function draw() {
